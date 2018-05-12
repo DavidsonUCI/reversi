@@ -1,0 +1,28 @@
+{
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "This is the game of reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidsonUCI/reversi.git"
+  },
+  "keywords": [
+    "reversi",
+    "game"
+  ],
+  "author": "Davidson Young",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DavidsonUCI/reversi/issues"
+  },
+  "homepage": "https://github.com/DavidsonUCI/reversi#readme",
+  "dependencies": {
+    "node-static": "^0.7.10",
+    "socket.io": "^2.1.0"
+  },
+  "devDependencies": {}
+}

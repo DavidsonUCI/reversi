@@ -1,0 +1,68 @@
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+a {
+  color: black;
+}
+
+.nav {
+  padding-top: 20px 20px 20px 20px;
+}
+
+.navbar-brand {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-item {
+  color: black;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.active {
+  background-color: red;
+}
+
+.header {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  margin-right: 16px;
+}
+
+.brand {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+.splash {
+  background-color: #CFD8DC;
+  padding: 40px  80px 120px 80px;
+  margin-bottom: 40px;
+}
+
+.playBtn {
+  width: 200px;
+  color: white;
+  background-color: #E040FB;
+  border-radius: 100px;
+  box-shadow: 3px 3px 6px #888888;
+  margin-top: 40px;
+}
+
+.playBtn:hover {
+    background-color: #EA80FC;
+    color: white;
+}

@@ -52,7 +52,7 @@ a:hover {
 
 
 .splash {
-  background-color: #CFD8DC;
+  background-color: #B39DDB;
   box-shadow: 3px 3px 10px #888888;
   padding: 40px  80px 120px 80px;
   margin-bottom: 40px;
@@ -61,13 +61,154 @@ a:hover {
 .playBtn {
   width: 200px;
   color: white;
-  background-color: #E040FB;
+  background-color: #00C853;
   border-radius: 100px;
   box-shadow: 3px 3px 6px #888888;
   margin-top: 40px;
 }
 
 .playBtn:hover {
-    background-color: #EA80FC;
+    background-color: #4CAF50;
     color: white;
+}
+
+.whiteToken {
+  background-color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  box-shadow: 2px 2px 2px grey;
+  margin: 0 auto;
+  z-index: 75;
+}
+
+.whiteTokenShadow {
+  background-color: none;
+  opacity: .30;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  box-shadow: inset -2px -2px 6px black;
+  z-index: 100;
+}
+
+.blackToken {
+  background-color: black;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  box-shadow: 2px 2px 2px grey;
+  margin: 0 auto;
+}
+
+.blackTokenHighlight {
+  content: '';
+  background-color: none;
+  opacity: .40;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  box-shadow: inset 2px 2px 6px white;
+  z-index: 100;
+  margin: 0 auto;
+}
+
+.greenToken {
+  background-color: green;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  box-shadow: 2px 2px 2px grey;
+}
+
+.scoreBoard {
+  background-color: #B39DDB;
+  padding-top: 20px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.scoreHeader {
+  border-bottom: 1px solid grey;
+  margin-bottom: 16px;
+}
+
+.score {
+    text-align: center;
+    padding: 40px 8px 8px 20px;
+}
+
+.scoreColor {
+  display: block;
+  text-align: center;
+}
+
+.myInfo {
+  padding: 40px 8px 8px 20px;
+}
+
+.playArea {
+  background-color: #B39DDB;
+  margin-top: 20px;
+}
+
+#whitesum {
+  font-size: 32px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#blacksum {
+  font-size: 32px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.board {
+  text-align: center;
+}
+
+#game_board {
+  align: middle;
+  background-color: #A5D6A7;
+  border: solid 2px #90A4AE;
+  box-shadow: 3px 3px 6px #607D8B;
+  padding-left: 0;
+  padding-right: auto;
+  margin-bottom: 40px;
+}
+
+#game_board {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table#game_board tr {
+  height: 64px;
+  border: solid 1px #90A4AE;
+}
+
+table#game_board td {
+  width: 64px;
+  border: solid 1px #90A4AE;
+  padding: 4px;
+}
+
+td.hovered_over:hover {
+  background: url('../images/hover.gif');
+  background-size: 100% 100%;
+}
+
+.messageBoard {
+  margin-top: 20px;
+  padding: 20px 40px 40px 40px;
+}
+
+#message p {
+  margin: 0px;
+}
+
+#send_message_holder {
+  width: 320px;
 }

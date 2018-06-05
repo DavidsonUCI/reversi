@@ -1,3 +1,7 @@
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
 body {
   height: 100%;
   min-height: 100%;
@@ -113,6 +117,12 @@ a:hover {
   margin: 0 auto;
 }
 
+.emptyToken {
+  background-color: 0;
+  height: 64px;
+  width: 64px;
+}
+
 .greenToken {
   background-color: green;
   height: 60px;
@@ -121,17 +131,70 @@ a:hover {
   box-shadow: 2px 2px 2px grey;
 }
 
+.error {
+  height: 48px;
+  width: 48px;
+  background-color: red;
+  border-radius: 48px;
+  z-index: 100;
+}
+
+.errorShadow {
+  position: absolute;
+  left: -15px;
+  top: 5px;
+  content: '';
+  height: 48px;
+  width: 48px;
+  background-color: none;
+  opacity: .2;
+  border-radius: 48px;
+  box-shadow: inset -2px -2px 2px black;
+  z-index: 150;
+}
+
+.errorSlash {
+  position: absolute;
+  content: '';
+  left: 10px;
+  top: -4px;
+  height: 100px;
+  width: 12px;
+  background-color: white;
+  transform: rotate(45deg);
+  z-index: 200;
+}
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+-moz-animation:fadeIn ease-in 1;
+animation:fadeIn ease-in 1;
+
+-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+-moz-animation-fill-mode:forwards;
+animation-fill-mode:forwards;
+
+-webkit-animation-duration:.4s;
+-moz-animation-duration:.4s;
+animation-duration:.4s;
+
+  -webkit-animation-delay: 0.1s;
+  -moz-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+
 .scoreBoard {
   background-color: #B39DDB;
   padding-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .scoreHeader {
   border-bottom: 1px solid grey;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .score {
@@ -169,7 +232,12 @@ a:hover {
   text-align: center;
 }
 
-#game_board {
+#game_over {
+  padding-left: 20px;
+  margin-right: auto;
+}
+
+table#game_board {
   align: middle;
   background-color: #A5D6A7;
   border: solid 2px #90A4AE;
@@ -177,26 +245,24 @@ a:hover {
   padding-left: 0;
   padding-right: auto;
   margin-bottom: 40px;
-}
-
-#game_board {
   margin-left: auto;
   margin-right: auto;
 }
 
 table#game_board tr {
-  height: 64px;
+  height: auto;
   border: solid 1px #90A4AE;
 }
 
 table#game_board td {
-  width: 64px;
+  width: auto;
   border: solid 1px #90A4AE;
   padding: 4px;
 }
 
-td.hovered_over:hover {
-  background: url('../images/hover.gif');
+.hovered_over:hover {
+  background-image: url('...images/hover.gif');
+  background-color: green;
   background-size: 100% 100%;
 }
 
@@ -205,7 +271,7 @@ td.hovered_over:hover {
   padding: 20px 40px 40px 40px;
 }
 
-#message p {
+#messages p {
   margin: 0px;
 }
 

@@ -735,19 +735,18 @@ table#game_board {
 table#game_board tr {
   height: auto;
   border: solid 1px #C62828;
-  box-shadow: inset 2px 2px 4px rgba(255,255,255,.1), inset -2px -2px 4px rgba(255,255,255,.1);
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,.2), inset -1px -1px 3px rgba(255,255,255,.2);
 }
 
 table#game_board td {
   width: auto;
   border: solid 1px #C62828;
-  box-shadow: inset 2px 2px 4px rgba(0,0,0,.2), inset -2px -2px 4px rgba(0,0,0,.2);
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,.2), inset -1px -1px 3px rgba(0,0,0,.2);
   padding: 4px;
 }
 
 .hovered_over:hover {
-  background-image: url('...images/hover.gif');
-  background-color: green;
+  background-color: #B2FF59;
   background-size: 100% 100%;
 }
 

@@ -380,13 +380,13 @@ socket.on('game_update', function(payload){
 
   $('#my_color').html('<h5 id="my_color">I\'m '+my_color+'</h5>');
   /*$('#whose_turn').html(payload.game.whose_turn);*/
-  $('#elapsed').html(elapsed);
+  $('#elapsed').html('<h4 class="text-center">'+elapsed+'</h4>');
   $('#username').html(username);
   $('#my_opponent').html(my_opponent);
   $('#my_logo').html(my_logo);
   $('#opponent_logo').html(opponent_logo);
-  $('#my_score').html('<span style="text-center">'+my_score+'</span>');
-  $('#opponent_score').html('<span style="text-center">'+opponent_score+'</span>');
+  $('#my_score').html('<h4 class="text-center">'+my_score+'</h4>');
+  $('#opponent_score').html('<h4 class="text-center">'+opponent_score+'</h4>');
 
 
   if (payload.game.whose_turn === 'zombie') {
@@ -510,6 +510,6 @@ socket.on('game_over', function(payload){
 	}
 
 	/* Jump to a new page */
-	$('#game_over').html('<h4>Game Over - '+payload.who_won+'\' won!</h2>');
-	$('#game_over').append('<br><a href="lobby.html?username='+username+'" class="btn btn-success btn-lg active btnLobby" role="button" aria-pressed="true">Return to the lobby</a>');
+	$('#game_over').html('<h4>Game Over!<br>'+payload.who_won+'s\' won!</h2>');
+	$('#game_over').append('<br><a href="lobby.html?username='+username+'" class="btn btn-success btn-lg active btnLobby" role="button" aria-pressed="true">Go to the lobby</a>');
 });

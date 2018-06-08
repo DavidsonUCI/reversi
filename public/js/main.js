@@ -56,9 +56,9 @@ socket.on('join_room_response', function(payload){
 		var nodeC = $('<div></div>');
 		nodeC.addClass('socket_'+payload.socket_id);
 
-		nodeA.addClass('w-100');
+		nodeA.addClass('w-200');
 
-		nodeB.addClass('col-9 text-right');
+		nodeB.addClass('col-3 text-left');
 		nodeB.append('<h4>'+payload.username+'</h4>');
 
 		nodeC.addClass('cold-3 text-left');
@@ -312,7 +312,7 @@ $(function(){
 	console.log('*** Client Log Message: \'join_room\ payload: ' + JSON.stringify(payload));
 	socket.emit('join_room', payload);
 
-	$('#quit').append('<a href="lobby.html?username='+username+'" class="btn btn-danger btn-default active" role="button" aria-pressed="true">Quit</a>');
+	$('#quit').append('<a href="lobby.html?username='+username+'" class="btn btn-danger btn-default active btnQuit" role="button" aria-pressed="true">Quit</a>');
 });
 
 /* Code for the board specifically */
@@ -328,6 +328,14 @@ var old_board = [
 ];
 
 var my_color = ' ';
+var interval_timer;
+
+
+/* Create Logos */
+var zombieLogo = '<h3 class="zombieTitle">Zombies</h3>';
+var vampireLogo = '<h3 class="vampireTitle">Vampires</h3>';
+
+
 
 socket.on('game_update', function(payload){
 	console.log('*** Client Log Message: \'game_update\' \n\tpayload: '+JSON.stringify(payload));
@@ -344,12 +352,23 @@ socket.on('game_update', function(payload){
 		return;
 	}
 
+
 	/* Update my color */
-	if (socket.id === payload.game.player_white.socket) {
-		my_color = 'white';
+	if (socket.id === payload.game.player_vampire.socket) {
+		my_color = 'vampire';
+    my_opponent = payload.game.player_zombie.username;
+    my_logo = vampireLogo;
+    opponent_logo = zombieLogo;
+    my_score = vampiresum;
+    opponent_score = zombiesum;
 	}
-	else if (socket.id === payload.game.player_black.socket) {
-		my_color = 'black';
+	else if (socket.id === payload.game.player_zombie.socket) {
+		my_color = 'zombie';
+    my_opponent = payload.game.player_vampire.username;
+    my_logo = zombieLogo;
+    opponent_logo = vampireLogo;
+    my_score = zombiesum;
+    opponent_score = vampiresum;
 	}
 	else {
 		/* Something weird is going on, like three people playing at once */
@@ -358,58 +377,85 @@ socket.on('game_update', function(payload){
 		return;
 	}
 
-	$('#my_color').html('<h5 id="my_color">('+my_color+')</h5>');
-  $('#my_color').append('<h5>It is '+payload.game.whose_turn+'\'s turn</h5>');
+
+  $('#my_color').html('<h5 id="my_color">I\'m '+my_color+'</h5>');
+  /*$('#whose_turn').html(payload.game.whose_turn);*/
+  $('#elapsed').html(elapsed);
+  $('#username').html(username);
+  $('#my_opponent').html(my_opponent);
+  $('#my_logo').html(my_logo);
+  $('#opponent_logo').html(opponent_logo);
+  $('#my_score').html('<span style="text-center">'+my_score+'</span>');
+  $('#opponent_score').html('<span style="text-center">'+opponent_score+'</span>');
 
 
-/* Versus display */
-/* My username */
-  $('#username').html('<h4 id="username">'+username+'</h4>');
-/* My opponent's username */
-  $('#opponent').html('<h4 id="opponent">'+opponent+'</h4>');
+  if (payload.game.whose_turn === 'zombie') {
+    $('#whose_turn').html(zombieLogo);
+  }
+  else {
+    $('#whose_turn').html(vampireLogo);
+}
 
 
-	/* Animate changes to the board */
-	var blacksum = 0;
-	var whitesum = 0;
-	var row,column;
-	for(row=0; row<8; row++){
-		for (column=0; column<8; column++){
-			if (board[row][column] === 'b'){
-				blacksum++;
-			}
-			if (board[row][column] === 'w'){
-				whitesum++;
-			}
+  clearInterval(interval_timer);
+  interval_timer = setInterval(function(last_time){
+      return function(){
+        /*Do the work of updating the UI*/
+        var d = new Date();
+        var elapsedmilli = d.getTime() - last_time;
+        var minutes = Math.floor(elapsedmilli / (60 * 1000));
+        var seconds = Math.floor((elapsedmilli % (60 * 1000)) / 1000);
+
+        if(seconds < 10) {
+          $('#elapsed').html(minutes+':0'+seconds);
+        }
+        else {
+          $('#elapsed').html(minutes+':'+seconds);
+        }
+      }}(payload.game.last_move_time)
+      , 1000);
+
+      /* Animate changes to the board */
+      var zombiesum = 0;
+      var vampiresum = 0;
+      var row,column;
+      for(row=0; row<8; row++){
+        for (column=0; column<8; column++){
+          if (board[row][column] === 'z'){
+            zombiesum++;
+          }
+          if (board[row][column] === 'v'){
+            vampiresum++;
+          }
 
 			/* If a board space has changed */
 			if (old_board[row][column] !== board[row][column]){
 				if (old_board[row][column] === '?' && board[row][column] === ' ') {
 					$('#'+row+'_'+column).html('<div class="emptyToken"></div>'/*'<img src="assets/images/empty.gif" alt="empty square"/>'*/);
 				}
-				else if (old_board[row][column] === '?' && board[row][column] === 'w') {
-					$('#'+row+'_'+column).html('<div class="whiteToken fade-in"><div class="whiteTokenShadow"></div></div>'/*''<img src="assets/images/empty_to_white.gif" alt="white square">'*/);
+				else if (old_board[row][column] === '?' && board[row][column] === 'v') {
+					$('#'+row+'_'+column).html('<div class="vampireHead"><div class="vampireHairPoint"></div><div class="vampireEyes"></div><div class="vampireMouth"></div><div class="vampireToothLeft"></div><div class="vampireToothRight"></div></div>'/*''<img src="assets/images/empty_to_vampire.gif" alt="vampire square">'*/);
 				}
-				else if (old_board[row][column] === '?' && board[row][column] === 'b'){
-					$('#'+row+'_'+column).html('<div class="blackToken fade-in"><div class="blackTokenHighlight"></div></div>'/*'<img src="assets/images/empty_to_black.gif" alt="black square">'*/);
+				else if (old_board[row][column] === '?' && board[row][column] === 'z'){
+					$('#'+row+'_'+column).html('<div class="zombieHead"><div class="zombieMouth"></div><div class="zombieCross"></div><div class="zombieEyeRight"></div></div>'/*'<img src="assets/images/empty_to_zombie.gif" alt="zombie square">'*/);
 				}
-				else if (old_board[row][column] === ' ' && board[row][column] === 'w') {
-					$('#'+row+'_'+column).html('<div class="whiteToken fade-in"><div class="whiteTokenShadow"></div></div>'/*'<img src="assets/images/empty_to_white.gif" alt="white square">'*/);
+				else if (old_board[row][column] === ' ' && board[row][column] === 'v') {
+					$('#'+row+'_'+column).html('<div class="vampireHead"><div class="vampireHairPoint"></div><div class="vampireEyes"></div><div class="vampireMouth"></div><div class="vampireToothLeft"></div><div class="vampireToothRight"></div></div>'/*'<img src="assets/images/empty_to_vampire.gif" alt="vampire square">'*/);
 				}
-				else if (old_board[row][column] === ' ' && board[row][column] === 'b'){
-					$('#'+row+'_'+column).html('<div class="blackToken fade-in"><div class="blackTokenHighlight"></div></div>'/*'<img src="assets/images/empty_to_black.gif" alt="empty square">'*/);
+				else if (old_board[row][column] === ' ' && board[row][column] === 'z'){
+					$('#'+row+'_'+column).html('<div class="zombieHead"><div class="zombieMouth"></div><div class="zombieCross"></div><div class="zombieEyeRight"></div></div>'/*'<img src="assets/images/empty_to_zombie.gif" alt="empty square">'*/);
 				}
-        else if (old_board[row][column] === 'w' && board[row][column] === ' ') {
-					$('#'+row+'_'+column).html('<div class="emptyToken"></div>'/*'<img src="assets/images/empty_to_white.gif" alt="white square">'*/);
+        else if (old_board[row][column] === 'v' && board[row][column] === ' ') {
+					$('#'+row+'_'+column).html('<div class="emptyToken"></div>'/*'<img src="assets/images/empty_to_vampire.gif" alt="vampire square">'*/);
 				}
-				else if (old_board[row][column] === 'b' && board[row][column] === ' '){
-					$('#'+row+'_'+column).html('<div class="emptyToken"></div>'/*'<img src="assets/images/empty_to_black.gif" alt="empty square">'*/);
+				else if (old_board[row][column] === 'z' && board[row][column] === ' '){
+					$('#'+row+'_'+column).html('<div class="emptyToken"></div>'/*'<img src="assets/images/empty_to_zombie.gif" alt="empty square">'*/);
 				}
-        else if (old_board[row][column] === 'w' && board[row][column] === 'b') {
-					$('#'+row+'_'+column).html(/*'<div class="blackToken fade-in"><div class="blackTokenHighlight"></div></div>'*/'<img src="assets/images/white_to_black.gif" alt="white square"/>');
+        else if (old_board[row][column] === 'v' && board[row][column] === 'z') {
+					$('#'+row+'_'+column).html('<div class="zombieHead"><div class="zombieMouth"></div><div class="zombieCross"></div><div class="zombieEyeRight"></div></div>'/*'<img src="assets/images/vampire_to_zombie.gif" alt="vampire square"/>'*/);
 				}
-				else if (old_board[row][column] === 'b' && board[row][column] === 'w'){
-					$('#'+row+'_'+column).html(/*'<div class="whiteToken fade-in"><div class="whiteTokenShadow"></div></div>'*/'<img src="assets/images/black_to_white.gif" alt="black square"/>');
+				else if (old_board[row][column] === 'z' && board[row][column] === 'v'){
+					$('#'+row+'_'+column).html('<div class="vampireHead"><div class="vampireHairPoint"></div><div class="vampireEyes"></div><div class="vampireMouth"></div><div class="vampireToothLeft"></div><div class="vampireToothRight"></div></div>'/*'<img src="assets/images/zombie_to_vampire.gif" alt="zombie square"/>'*/);
 				}
 				else {
 					$('#'+row+'_'+column).html('<div class="error"></div>');
@@ -437,9 +483,9 @@ socket.on('game_update', function(payload){
 			}
 		}
 	}
-  /*end video 25*/
-	$('#blacksum').html(blacksum);
-	$('#whitesum').html(whitesum);
+
+	$('#my_score').html(zombiesum);
+	$('#opponent_score').html(vampiresum);
 
 	old_board = board;
 });
@@ -464,6 +510,6 @@ socket.on('game_over', function(payload){
 	}
 
 	/* Jump to a new page */
-	$('#game_over').html('<h1>Game Over</h1><h2>'+payload.who_won+' won!</h2>');
-	$('#game_over').append('<br><a href="lobby.html?username='+username+'" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Return to the lobby</a>');
+	$('#game_over').html('<h4>Game Over - '+payload.who_won+'\' won!</h2>');
+	$('#game_over').append('<br><a href="lobby.html?username='+username+'" class="btn btn-success btn-lg active btnLobby" role="button" aria-pressed="true">Return to the lobby</a>');
 });

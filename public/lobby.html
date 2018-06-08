@@ -5,38 +5,94 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 
-    <title>Reversi Game Lobby</title>
+    <title>Game Lobby</title>
 
     <!-- Bootstrap CSS -->
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' integrity='sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB' crossorigin='anonymous'>
     <link rel='stylesheet' type='text/css' href='css/style.css' >
 
-  </head>
-  <body>
-    <div class='container-fluid text-center'>
-      <div class='container header'>
-      <ul class='nav nav-pills'>
-        <li class='nav-item'>
-          <span class='align-middle'><a class='nav-link navbar-brand' href='index.html'><img class='img-fluid logo' src='assets/images/Reversi Logo 1.png' alt='Reversi logo' width='48px' height='100%'/>
-          Reversi</a></span>
-        </li>
-        <li class='nav-item'>
-          <span class='align-middle'><a class='nav-link' href='about.html'>About</a></span>
-        </li>
-        <li class='nav-item'>
-          <span class='align-middle'><a class='nav-link' href='https://en.wikipedia.org/wiki/Reversi' target='_blank'>Rules</a></span>
-        </li>
-      </ul>
-      </div>
+      <link href="https://fonts.googleapis.com/css?family=Creepster|Frijole|Quicksand:400,700|UnifrakturMaguntia" rel="stylesheet">
 
-<div class='container text-center splash'>
-        <div class='row' id='header-row'>
+  </head>
+<body>
+
+  <div class="container-fluid text-center splash">
+    <div class="container">
+      <div class="row">
+        <div class='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+        </div>
+        <div class='col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3'>
+            <h1 class="vampireTitle">Vampires</h1>
+        </div>
+        <div class='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+          <h2 class="title">versus</h2>
+        </div>
+        <div class='col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3'>
+            <h1 class="zombieTitle">Zombies</h1>
+        </div>
+        <div class='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2'>
+        </div>
+      </div>
+    </div>
+    <div class='container taglineSection'>
+          <div class="row text-center">
+            <div class="col-12">
+            <h4 class="tagline">A game of evil vs evil!
+            <br>The most undead soldiers win!
+            </div>
+          </div>
+    </div>
+  </div>
+<div class='container-fluid gameLobby'>
+  <div class='container-fluid drip'>
+    <div class='row'>
+      <div class="col-1 dripCol">
+          <div class="dripOne"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+          <div class="reverseDripOne"></div>
+      </div>
+      <div class="col-1 dripCol">
+        <div class="dripTwo"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+        <div class="reverseDripOne"></div>
+      </div>
+      <div class="col-1 dripCol">
+        <div class="dripThree"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+        <div class="reverseDripTwo"></div>
+      </div>
+      <div class="col-1 dripCol">
+        <div class="dripOne"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+        <div class="reverseDripOne"></div>
+      </div>
+      <div class="col-1 dripCol">
+        <div class="dripTwo"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+        <div class="reverseDripOne"></div>
+      </div>
+      <div class="col-1 dripCol">
+        <div class="dripOne"></div>
+      </div>
+      <div class="col-1 reverseDripCol">
+        <div class="reverseDripOne"></div>
+      </div>
+    </div>
+  </div>
+<div class='container lobbyEntry'>
+  <div class='row' id='header-row'>
+
           <div class='col'>
-            <h2>Reversi Game Lobby</h2>
+            <h2 class='sectionHeader'>Game Lobby</h2>
           </div>
         </div>
 
-        <div class='row align-items-end' id='players'>
+        <div class='row align-items-start playerList' id='players'>
           <div class='col-9 text-left'>
             <h3>Players</h3>
           </div>
@@ -46,14 +102,13 @@
 
 
           <div class='row'>
-            <div class='col-12 text-left'>
+            <div class='col-12 lobbyMessages'>
               <h3>Messages</h3>
-              <form class='form-line' onsubmit='send_message(); return false;'>
+              <form class='form-inline' onsubmit='send_message(); return false;'>
                 <div class='form-group'>
                   <label for='send_message_holder' class='col-form-label sr-only'>Enter your chat message</label>
-                  <input class='form-control mx-auto w-75' type='text' value='' id='send_message_holder' placeholder='enter your chat message' autocomplete='off'/>
-                </div>
-                  <button type='submit' class='btn btn-default btn-primary'>Send</button>
+                  <input class='form-control' type='text' value='' id='send_message_holder' placeholder='enter your chat message' autocomplete='off'/>
+                  <button type='submit' class='btn btn-default btn-primary btnSend'>Send</button>
               </form>
             </div>
           </div>
@@ -65,7 +120,9 @@
               </div>
             </div>
 
-
+    </div>
+  </div>
+</div>
 </div>
 
     <!-- Optional JavaScript -->

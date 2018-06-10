@@ -240,6 +240,15 @@ a:hover {
   box-shadow: inset 0px -4px 0px rgba(0,0,0,.1);
 }
 
+.dripFour {
+  height: 100px;
+  width: 100%;
+  background-color: #C62828;
+  border-radius: 0px 0px 100px 100px;
+  padding: 0;
+  box-shadow: inset 0px -4px 0px rgba(0,0,0,.1);
+}
+
 .reverseDripCol {
   background-color: #C62828;
   height: 160px;
@@ -262,6 +271,17 @@ a:hover {
   width: 100%;
   background-color:#ECEFF1;
   border-radius: 1000px 1000px 0px 0px;
+  margin-top: 00px;
+  margin-bottom: 20px;
+  padding: 0;
+  box-shadow: inset 0px 4px 0px rgba(0,0,0,.3);
+}
+
+.reverseDripThree {
+  height: 200px;
+  width: 100%;
+  background-color:#ECEFF1;
+  border-radius: 30px 30px 0px 50px;
   margin-top: 00px;
   margin-bottom: 20px;
   padding: 0;
